@@ -20,6 +20,13 @@ img {
   height: auto;
 }
 
+html {
+  --color-accent: oklch(72.358% 0.14107 3.004);   /* warm soft pink */
+  /*--color-accent: oklch(78% 25% 180);   /* seafoam green-blue */
+  /*--color-accent: oklch(70% 30% 275);   /* periwinkle */
+  accent-color: var(--color-accent);
+}
+
 nav {
   display: flex;
   margin-bottom: 1em;
@@ -35,6 +42,37 @@ nav a {
 }
 
 nav a.current {
-  border-bottom: 0.3em solid oklch(80% 3% 200);
-  padding-bottom: 0.2em;
+  border-bottom: 0.4em solid oklch(80% 3% 200);
+  padding-bottom: 0.1em;
 }
+
+/* Keep this AFTER nav a.current so it wins when you hover the current page */
+nav a:hover {
+  border-bottom: 0.4em solid var(--color-accent);
+  padding-bottom: 0.1em;
+  background-color: oklch(from var(--color-accent) 98% 4% h);
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+label {
+  display: block;
+  margin-block: 1em;
+}
+
+textarea {
+  resize: vertical;   /* only let people resize up and down */
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--color-accent);
+}
+
