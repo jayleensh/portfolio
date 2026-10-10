@@ -11,7 +11,7 @@ img {
 }
 
 html {
-  --color-accent: oklch(72.358% 0.14107 3.004);   /* warm soft pink */
+  --color-accent: oklch(77.608% 0.12806 1.736);   /* warm soft pink */
   /*--color-accent: oklch(78% 25% 180);   /* seafoam green-blue */
   /*--color-accent: oklch(70% 30% 275);   /* periwinkle */
   accent-color: var(--color-accent);
@@ -86,6 +86,6 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 
   &:is(h1) {
-    font-size: 400%;
+    font-size: 250%;
   }
 }
