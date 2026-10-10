@@ -1,6 +1,16 @@
 body {
-  /* Set line height to 1.5 times the font size
-	   and use the OS’s UI font as the website font
-	 */
+  /* line height to 1.5 times the font size */
   font: 100%/1.5 system-ui;
+
+  /* stop the content from getting too wide */
+  max-width: 100ch;
+
+  /* center it */
+  margin-inline: auto;
+}
+
+body {
+  font: 100%/1.5 system-ui;
+  max-width: 100ch;
+  margin-inline: max(1em, (100% - 100ch) / 2);
 }
