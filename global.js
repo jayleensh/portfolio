@@ -6,4 +6,10 @@ function $$(selector, context = document) {
 
 let navLinks = $$("nav a");
 
-console.log(navLinks);
+let currentLink = navLinks.find(
+  (a) => a.host === location.host && a.pathname === location.pathname,
+);
+
+if (currentLink) {
+  currentLink.classList.add("current");
+}
