@@ -58,6 +58,15 @@ document.body.insertAdjacentHTML(
 
 let select = document.querySelector(".color-scheme select");
 
+// on page load, apply the saved preference
+if ("colorScheme" in localStorage) {
+  let saved = localStorage.colorScheme;
+  document.documentElement.style.setProperty("color-scheme", saved);
+  select.value = saved;
+}
+
+// when the user changes the dropdown, apply and save 
 select.addEventListener("input", function (event) {
   document.documentElement.style.setProperty("color-scheme", event.target.value);
+  localStorage.colorScheme = event.target.value;
 });
