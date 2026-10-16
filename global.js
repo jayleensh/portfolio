@@ -26,5 +26,18 @@ for (let p of pages) {
 
   url = !url.startsWith("http") ? BASE_PATH + url : url;
 
-  nav.insertAdjacentHTML("beforeend", `<a href="${url}">${title}</a>`);
+  let a = document.createElement("a");
+  a.href = url;
+  a.textContent = title;
+  nav.append(a);
+
+  // Highlight the current page
+  if (a.host === location.host && a.pathname === location.pathname) {
+    a.classList.add("current");
+  }
+
+  // Open external links in a new tab
+  if (a.host !== location.host) {
+    a.target = "_blank";
+  }
 }
