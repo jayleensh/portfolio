@@ -47,7 +47,8 @@ nav a:hover {
 
 input,
 textarea,
-button {
+button,
+select {
   font: inherit;
 }
 
@@ -90,4 +91,12 @@ h1, h2, h3, h4, h5, h6 {
   &:is(h1) {
     font-size: 250%;
   }
+}
+
+/* position color scheme switch */
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 80%;
 }
