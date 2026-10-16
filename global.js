@@ -58,15 +58,31 @@ document.body.insertAdjacentHTML(
 
 let select = document.querySelector(".color-scheme select");
 
-// on page load, apply the saved preference
+// save and apply preference
 if ("colorScheme" in localStorage) {
   let saved = localStorage.colorScheme;
   document.documentElement.style.setProperty("color-scheme", saved);
   select.value = saved;
 }
 
-// when the user changes the dropdown, apply and save 
 select.addEventListener("input", function (event) {
   document.documentElement.style.setProperty("color-scheme", event.target.value);
   localStorage.colorScheme = event.target.value;
+});
+
+// contact form redo
+let form = document.querySelector("form");
+
+form?.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  let data = new FormData(form);
+  let params = [];
+
+  for (let [name, value] of data) {
+    params.push(name + "=" + encodeURIComponent(value));
+  }
+
+  let url = form.action + "?" + params.join("&");
+  location.href = url;
 });
