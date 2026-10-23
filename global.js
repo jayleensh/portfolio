@@ -104,8 +104,6 @@ export async function fetchJSON(url) {
   }
 }
 
-fetchJSON(BASE_PATH + "lib/projects.json").then(console.log);
-
 // render projects function
 export function renderProjects(projects, containerElement, headingLevel = "h2") {
   // Check that we got a real element to draw into
