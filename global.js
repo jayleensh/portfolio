@@ -90,7 +90,6 @@ form?.addEventListener("submit", function (event) {
 // asynchronous JSON fetch function
 export async function fetchJSON(url) {
   try {
-    // Fetch the JSON file from the given URL
     const response = await fetch(url);
     console.log(response);
 
@@ -106,3 +105,37 @@ export async function fetchJSON(url) {
 }
 
 fetchJSON(BASE_PATH + "lib/projects.json").then(console.log);
+
+// render projects function
+export function renderProjects(projects, containerElement, headingLevel = "h2") {
+  // Check that we got a real element to draw into
+  if (!(containerElement instanceof Element)) {
+    console.error("renderProjects: containerElement is not a valid element");
+    return;
+  }
+
+  const validHeadings = ["h1", "h2", "h3", "h4", "h5", "h6"];
+  if (!validHeadings.includes(headingLevel)) {
+    console.warn(`renderProjects: "${headingLevel}" is not a heading, using h2`);
+    headingLevel = "h2";
+  }
+
+  containerElement.innerHTML = "";
+
+  if (!Array.isArray(projects) || projects.length === 0) {
+    containerElement.innerHTML = "<p>No projects to show yet. Check back soon!</p>";
+    return;
+  }
+
+  for (let project of projects) {
+    const article = document.createElement("article");
+
+    article.innerHTML = `
+      <${headingLevel}>${project.title ?? "Untitled project"}</${headingLevel}>
+      <img src="${project.image ?? ""}" alt="${project.title ?? ""}">
+      <p>${project.description ?? ""}</p>
+    `;
+
+    containerElement.appendChild(article);
+  }
+}
