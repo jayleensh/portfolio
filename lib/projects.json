@@ -1,74 +1,74 @@
 [
-    {
-        "title": "Lorem ipsum dolor sit.",
-        "year": "2024",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, eos sapiente quam molestiae repudiandae, nostrum explicabo consequuntur obcaecati, numquam unde cumque esse? Ad, soluta. Et ducimus tempora labore cumque sint."
-    },
-    {
-        "title": "Soluta molestiae magni officia?",
-        "year": "2025",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Repellat, alias optio debitis dolore esse eaque aliquam similique, veritatis facere magnam corrupti assumenda consequatur laudantium, quidem ad ipsam excepturi nobis quis. Hic explicabo molestiae, necessitatibus pariatur assumenda quaerat consequuntur?"
-    },
-    {
-        "title": "Inventore rem esse incidunt!",
-        "year": "2026",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Iure id temporibus doloremque exercitationem eveniet corporis praesentium quidem sint nobis nostrum. Reprehenderit repellendus debitis, omnis quam harum voluptatem praesentium est sit perspiciatis deserunt. Voluptatem nobis eum ipsam recusandae dolorum."
-    },
-    {
-        "title": "Doloremque suscipit perspiciatis unde!",
-        "year": "2024",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Architecto, adipisci libero odio cupiditate quibusdam deserunt distinctio qui mollitia tempore repudiandae molestias provident voluptas praesentium, voluptatem, earum doloremque nemo? Facere deleniti nemo nostrum voluptatum accusantium temporibus eius nulla expedita?"
-    },
-    {
-        "title": "Sint accusamus repellat eius?",
-        "year": "2024",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Iusto provident magni non ducimus. Blanditiis neque explicabo architecto fugit deserunt, id repellat est sunt ullam hic, voluptas ea commodi. Dicta eos rem dolores dolore natus odit eveniet totam eius."
-    },
-    {
-        "title": "Culpa a quos voluptatem.",
-        "year": "2024",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Eum minus commodi cupiditate eveniet, aut corrupti maiores neque nobis, perspiciatis ullam inventore velit aliquam. Nihil dicta quia nemo, deserunt ipsum enim repellendus omnis culpa eligendi doloremque, eius consequatur laudantium?"
-    },
-    {
-        "title": "Vitae ducimus qui est?",
-        "year": "2025",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Labore, autem cupiditate? Voluptatem, aut. Distinctio recusandae nobis porro consequatur non voluptates voluptatum cumque fuga natus quos repudiandae qui pariatur rem amet necessitatibus, quisquam earum minima deserunt excepturi voluptate exercitationem."
-    },
-    {
-        "title": "Maiores sit voluptates pariatur?",
-        "year": "2024",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Iure fuga dignissimos ea ducimus quis similique magnam aliquid alias, corporis in eligendi hic fugiat vero laboriosam totam sint, laudantium a, non quos tempora sapiente assumenda ipsum nostrum dolores. Et."
-    },
-    {
-        "title": "Odio ipsam a omnis.",
-        "year": "2026",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Debitis neque deserunt nam ut, ab, nisi eius illo voluptate assumenda corrupti in temporibus, sequi esse totam? Illum incidunt illo in. Excepturi quia adipisci nisi voluptas debitis fugiat accusantium sunt."
-    },
-    {
-        "title": "Praesentium obcaecati voluptate ad!",
-        "year": "2025",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Esse hic nisi aut voluptatem? Dolorem alias vel aut repellat placeat ipsum? Magnam necessitatibus totam repudiandae esse nostrum sapiente voluptatem consequatur! Ullam obcaecati possimus similique incidunt blanditiis, molestias a consequuntur?"
-    },
-    {
-        "title": "Laborum dignissimos alias aspernatur.",
-        "year": "2026",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Deleniti rem natus culpa nobis quasi harum ducimus, saepe reprehenderit vitae suscipit veniam corporis mollitia, doloremque quo non. Pariatur quas, saepe totam vitae perferendis eaque mollitia minima. Molestiae, quis atque."
-    },
-    {
-        "title": "Maxime voluptates nulla officiis!",
-        "year": "2026",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Iusto quam omnis nisi quibusdam numquam! Eius ratione tenetur aperiam officia repudiandae optio qui maxime impedit exercitationem? Error suscipit porro iste, quibusdam placeat odit corporis laudantium, reprehenderit sint sit non!"
-    }
+  {
+    "title": "Lab 1: Personal Website",
+    "year": "2026",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "My first website, built from scratch with HTML. It has a home page, a photo, a navigation menu, and a contact form that opens my email app."
+  },
+  {
+    "title": "Lab 2: Styling with CSS",
+    "year": "2026",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Added a stylesheet with a soft pink accent color, a flexbox navigation bar, a grid-based contact form, and a responsive projects layout."
+  },
+  {
+    "title": "Lab 3: Dark Mode and JavaScript",
+    "year": "2026",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Made the navigation menu generate itself, highlighted the current page automatically, and added a theme switch that remembers your choice."
+  },
+  {
+    "title": "Lab 4: Projects from Data",
+    "year": "2026",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Moved my project list into a JSON file and wrote a reusable function that draws the cards on both the home page and the projects page."
+  },
+  {
+    "title": "Dream Outfit Moodboard",
+    "year": "2026",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "A moodboard page for planning outfits, with color swatches, fabric notes, and a grid of favorite looks sorted by season."
+  },
+  {
+    "title": "Cozy Game Screenshot Gallery",
+    "year": "2025",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "A photo gallery of my favorite scenery and outfit screenshots from cozy video game worlds, laid out in a masonry-style grid."
+  },
+  {
+    "title": "Sweet Pea Bakery Chalkboard Menu",
+    "year": "2025",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "A hand-drawn menu design for a neighborhood bakery, later recreated as a printable web page with prices and seasonal specials."
+  },
+  {
+    "title": "Happy Paws Adoption Photos",
+    "year": "2025",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Profile photos and short bios for shelter dogs, built to make the adoption website friendlier and easier to browse."
+  },
+  {
+    "title": "Tiny Sticker Shop",
+    "year": "2024",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "A small online shop for my hand-drawn sticker designs, including a product page, a price list, and a donation note for the shelter."
+  },
+  {
+    "title": "Campus Clothing Swap Poster",
+    "year": "2024",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Event branding for a campus clothing swap: a poster, a sign-up page, and a simple map showing where to drop off donations."
+  },
+  {
+    "title": "Doodle Notebook Archive",
+    "year": "2023",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Scanned pages from my doodle notebooks, sorted by theme, with short captions about what inspired each drawing."
+  },
+  {
+    "title": "Color Palette Generator",
+    "year": "2023",
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "A tiny tool that picks matching pastel colors from a single starting hue, built while learning about color and contrast."
+  }
 ]
