@@ -53,6 +53,21 @@ function renderPieChart(projectsGiven) {
                     .attr('class', (_, idx) => (
                         selectedIndex === idx ? 'legend-item selected' : 'legend-item'
                     ));
+ 
+
+                if (selectedIndex === -1) {
+                    renderProjects(projects, projectsContainer, 'h2');
+                    projectsTitle.textContent = `${projects.length} Projects`;
+                } else {
+                    let selectedYear = newData[selectedIndex].label;
+
+                    let filteredProjects = projects.filter((project) =>
+                        project.year === selectedYear
+                    );
+
+                    renderProjects(filteredProjects, projectsContainer, 'h2');
+                    projectsTitle.textContent = `${filteredProjects.length} Projects`;
+                }
             });
     });
 
