@@ -10,6 +10,8 @@ renderProjects(projects, projectsContainer, "h2");
 const projectsTitle = document.querySelector(".projects-title");
 projectsTitle.textContent = `${projects.length} Projects`;
 
+let selectedIndex = -1;
+
 function renderPieChart(projectsGiven) {
     let newRolledData = d3.rollups(
         projectsGiven,
@@ -34,16 +36,30 @@ function renderPieChart(projectsGiven) {
     let legend = d3.select('.legend');
     legend.selectAll('li').remove();
 
-    newArcs.forEach((arc, idx) => {
+    newArcs.forEach((arc, i) => {
         newSVG.append('path')
             .attr('d', arc)
-            .attr('fill', newColors(idx));
+            .attr('fill', newColors(i))
+            .attr('class', selectedIndex === i ? 'selected' : '')
+            .on('click', () => {
+                selectedIndex = selectedIndex === i ? -1 : i;
+
+                newSVG.selectAll('path')
+                    .attr('class', (_, idx) => (
+                        selectedIndex === idx ? 'selected' : ''
+                    ));
+
+                legend.selectAll('li')
+                    .attr('class', (_, idx) => (
+                        selectedIndex === idx ? 'legend-item selected' : 'legend-item'
+                    ));
+            });
     });
 
     newData.forEach((d, idx) => {
         legend.append('li')
             .attr('style', `--color:${newColors(idx)}`)
-            .attr('class', 'legend-item')
+            .attr('class', selectedIndex === idx ? 'legend-item selected' : 'legend-item')
             .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
     });
 }
@@ -62,5 +78,6 @@ searchInput.addEventListener('change', (event) => {
 
     renderProjects(filteredProjects, projectsContainer, 'h2');
     projectsTitle.textContent = `${filteredProjects.length} Projects`;
+    selectedIndex = -1;
     renderPieChart(filteredProjects);
 });
