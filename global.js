@@ -106,7 +106,6 @@ export async function fetchJSON(url) {
 
 // render projects function
 export function renderProjects(projects, containerElement, headingLevel = "h2") {
-  // Check that we got a real element to draw into
   if (!(containerElement instanceof Element)) {
     console.error("renderProjects: containerElement is not a valid element");
     return;
@@ -131,14 +130,15 @@ export function renderProjects(projects, containerElement, headingLevel = "h2") 
     article.innerHTML = `
       <${headingLevel}>${project.title ?? "Untitled project"}</${headingLevel}>
       <img src="${project.image ?? ""}" alt="${project.title ?? ""}">
-      </div>
+      <div>
           <p>${project.description ?? ""}</p>
           <p class="project-year">c. ${project.year ?? ""}</p>
       </div>
-  `;
+    `;
     containerElement.appendChild(article);
   }
 }
+
 
 export async function fetchGitHubData(username) {
   return fetchJSON(`https://api.github.com/users/${username}`);
