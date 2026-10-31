@@ -144,7 +144,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .selected {
-    --color: var(--color-accent) !important;
+    --color: var(oklch(60% 45% 0)) !important;
 
     &:is(path) {
         fill: var(--color);
