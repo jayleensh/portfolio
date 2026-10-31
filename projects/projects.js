@@ -9,7 +9,6 @@ const projectsTitle = document.querySelector(".projects-title");
 let query = '';
 let selectedYear = null;
 
-// projects matching the search (ignores the selected year)
 function getSearchFiltered() {
     return projects.filter((project) => {
         let values = Object.values(project).join('\n').toLowerCase();
@@ -17,7 +16,6 @@ function getSearchFiltered() {
     });
 }
 
-// one place that applies filters and re-renders everything
 function update() {
     let searchFiltered = getSearchFiltered();
 
