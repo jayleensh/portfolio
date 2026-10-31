@@ -40,9 +40,7 @@ function update() {
 const palette = [
     'oklch(45% 0.12 250)', // deep blue
     'oklch(65% 0.11 200)', // teal
-    'oklch(38% 0.14 280)', // indigo
     'oklch(55% 0.12 165)', // green-teal
-    'oklch(70% 0.09 235)', // sky blue
     'oklch(35% 0.07 220)', // dark slate
     'oklch(50% 0.13 145)', // green
     'oklch(60% 0.10 270)', // periwinkle
