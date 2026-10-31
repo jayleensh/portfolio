@@ -2,6 +2,7 @@ import { fetchJSON, renderProjects } from "../global.js";
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
 const projects = await fetchJSON("../lib/projects.json");
+let query = '';
 
 const projectsContainer = document.querySelector(".projects");
 renderProjects(projects, projectsContainer, "h2");
@@ -41,4 +42,18 @@ data.forEach((d, idx) => {
         .attr('style', `--color:${colors(idx)}`)
         .attr('class', 'legend-item')
         .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
+});
+
+
+let searchInput = document.querySelector('.searchBar');
+
+searchInput.addEventListener('change', (event) => {
+    query = event.target.value;
+
+    let filteredProjects = projects.filter((project) =>
+        project.title.includes(query),
+    );
+
+    renderProjects(filteredProjects, projectsContainer, "h2");
+    projectsTitle.textContent = `${filteredProjects.length} Projects`;
 });
