@@ -143,13 +143,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-css
 .selected {
-    --color: oklch(66.417% 0.16575 2) !important;
+    --color: var(--color-accent) !important;
+}
 
-    &:is(path) {
-        fill: var(--color-accent);
-    }
+path.selected {
+    fill: var(--color);
 }
 
 
