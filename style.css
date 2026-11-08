@@ -101,18 +101,21 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 80%;
 }
 
-/* profile stats */
-#profile-stats dl {
+/* profile stats + meta page stats */
+#profile-stats dl,
+dl.stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(8em, 1fr));
   text-align: center;
 }
 
-#profile-stats dt {
+#profile-stats dt,
+.stats dt {
   grid-row: 1;
 }
 
-#profile-stats dd {
+#profile-stats dd,
+.stats dd {
   grid-row: 2;
   margin: 0;
   font-size: 2em;
