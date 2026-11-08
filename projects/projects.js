@@ -9,12 +9,14 @@ const projectsTitle = document.querySelector(".projects-title");
 let query = '';
 let selectedYear = null;
 
+
 function getSearchFiltered() {
     return projects.filter((project) => {
         let values = Object.values(project).join('\n').toLowerCase();
         return values.includes(query.toLowerCase());
     });
 }
+
 
 function update() {
     let searchFiltered = getSearchFiltered();
