@@ -70,5 +70,12 @@
     "year": "2023",
     "image": "https://dsc106.com/labs/lab02/images/empty.svg",
     "description": "A tiny tool that picks matching pastel colors from a single starting hue, built while learning about color and contrast."
+  },
+  {
+    "title": "Bikewatching",
+    "year": "2026",
+    "image": "images/bikewatching.png",
+    "description": "An interactive map of Boston and Cambridge bike traffic, featuring bike lanes, station activity, time filtering, and traffic flow visualization.",
+    "url": "https://jayleensh.github.io/bikewatching/"
   }
 ]
