@@ -17,9 +17,9 @@ html {
   /*--color-accent: oklch(70% 30% 275);   /* periwinkle */
   accent-color: var(--color-accent);
   --meta-css: #7299b8;
-  --meta-html: #d5a56d;
-  --meta-js: #b18eca;
-  --meta-svelte: #75afa5;
+  --meta-html: #b18eca;
+  --meta-js: #75afa5;
+  --meta-svelte: #d5a56d;
 }
 
 nav {
