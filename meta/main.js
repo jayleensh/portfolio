@@ -1,4 +1,5 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+import scrollama from 'https://cdn.jsdelivr.net/npm/scrollama@3.2.0/+esm';
 
 let xScale;
 let yScale;
@@ -25,7 +26,7 @@ function processCommits(data) {
 
       let ret = {
         id: commit,
-        url: 'https://github.com/YOUR_USERNAME/YOUR_REPO/commit/' + commit,
+        url: 'https://github.com/jayleensh/portfolio/commit/' + commit,
         author,
         date,
         time,
@@ -43,7 +44,8 @@ function processCommits(data) {
       });
 
       return ret;
-    });
+    })
+    .sort((a, b) => a.datetime - b.datetime);
 }
 
 function renderCommitInfo(data, commits) {
@@ -324,7 +326,11 @@ const commitTime = document.getElementById('commit-time');
 
 function onTimeSliderChange() {
   commitProgress = timeSlider.valueAsNumber;
-  commitMaxTime = timeScale.invert(commitProgress);
+  updateCommitCutoff(timeScale.invert(commitProgress));
+}
+
+function updateCommitCutoff(datetime) {
+  commitMaxTime = datetime;
   if (Number.isNaN(commitMaxTime.getTime())) return;
 
   commitTime.dateTime = commitMaxTime.toISOString();
@@ -341,3 +347,44 @@ renderCommitInfo(data, commits);
 renderScatterPlot();
 timeSlider.addEventListener('input', onTimeSliderChange);
 onTimeSliderChange();
+
+const steps = d3.select('#scatter-story')
+  .selectAll('.step')
+  .data(commits, (commit) => commit.id)
+  .join('div')
+  .attr('class', 'step');
+
+steps.each(function (commit, index) {
+  const date = commit.datetime.toLocaleString('en', {
+    dateStyle: 'full',
+    timeStyle: 'short',
+  });
+  const fileCount = new Set(commit.lines.map((line) => line.file)).size;
+  const paragraph = d3.select(this).append('p');
+
+  paragraph.append('time')
+    .attr('datetime', commit.datetime.toISOString())
+    .text(date);
+  paragraph.append('span').text(index === 0 ? ' · First commit ' : ' · Commit ');
+  paragraph.append('a')
+    .attr('href', commit.url)
+    .attr('target', '_blank')
+    .attr('rel', 'noopener')
+    .text(commit.id.slice(0, 7));
+  paragraph.append('span').text(
+    ` covers ${commit.totalLines} ${commit.totalLines === 1 ? 'line' : 'lines'} across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}.`,
+  );
+});
+
+function onStepEnter({ element }) {
+  const { datetime } = d3.select(element).datum();
+  commitProgress = timeScale(datetime);
+  timeSlider.valueAsNumber = commitProgress;
+  updateCommitCutoff(datetime);
+}
+
+if (commits.length) {
+  scrollama()
+    .setup({ container: '#scrolly-1', step: '#scrolly-1 .step' })
+    .onStepEnter(onStepEnter);
+}

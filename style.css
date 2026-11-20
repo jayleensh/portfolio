@@ -242,6 +242,50 @@ dl.info[hidden]:not(:hover, :focus-within) {
   margin-inline: 0;
 }
 
+#scrolly-1 {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+
+  > * {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+#scatter-story {
+  position: relative;
+
+  .step {
+    min-height: 55vh;
+    display: grid;
+    align-content: center;
+  }
+}
+
+#scatter-plot {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  min-height: 50vh;
+  background: canvas;
+}
+
+@media (max-width: 40rem) {
+  #scrolly-1 {
+    flex-direction: column;
+  }
+
+  #scatter-plot {
+    order: -1;
+    align-self: stretch;
+    min-height: 0;
+    max-height: 48vh;
+    overflow: auto;
+    z-index: 1;
+  }
+}
+
 #files {
   display: grid;
   grid-template-columns: 1fr 4fr;
