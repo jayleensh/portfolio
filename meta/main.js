@@ -309,10 +309,17 @@ function updateFileDisplay(filteredCommits) {
 }
 
 
-
 let data = await loadData();
-const colors = d3.scaleOrdinal(d3.schemeTableau10)
-  .domain(d3.sort(new Set(data.map((line) => line.type))));
+
+const colors = d3.scaleOrdinal()
+  .domain(['CSS', 'HTML', 'JS', 'Svelte'])
+  .range([
+    'var(--meta-css)',
+    'var(--meta-html)',
+    'var(--meta-js)',
+    'var(--meta-svelte)'
+  ])
+  .unknown('var(--color-accent)');
 let commits = processCommits(data);
 let filteredCommits = commits;
 
