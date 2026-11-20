@@ -323,30 +323,12 @@ const colors = d3.scaleOrdinal()
 let commits = processCommits(data);
 let filteredCommits = commits;
 
-let commitProgress = 100;
-const timeScale = d3
-  .scaleTime()
-  .domain(d3.extent(commits, (d) => d.datetime))
-  .range([0, 100]);
 let commitMaxTime;
-
-const timeSlider = document.getElementById('commit-progress');
-const commitTime = document.getElementById('commit-time');
-
-function onTimeSliderChange() {
-  commitProgress = timeSlider.valueAsNumber;
-  updateCommitCutoff(timeScale.invert(commitProgress));
-}
 
 function updateCommitCutoff(datetime) {
   commitMaxTime = datetime;
   if (Number.isNaN(commitMaxTime.getTime())) return;
 
-  commitTime.dateTime = commitMaxTime.toISOString();
-  commitTime.textContent = commitMaxTime.toLocaleString(undefined, {
-    dateStyle: 'long',
-    timeStyle: 'short',
-  });
   filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
   updateScatterPlot(filteredCommits);
   updateFileDisplay(filteredCommits);
@@ -354,8 +336,7 @@ function updateCommitCutoff(datetime) {
 
 renderCommitInfo(data, commits);
 renderScatterPlot();
-timeSlider.addEventListener('input', onTimeSliderChange);
-onTimeSliderChange();
+updateCommitCutoff(commits[0].datetime);
 
 const steps = d3.select('#scatter-story')
   .selectAll('.step')
@@ -387,8 +368,6 @@ steps.each(function (commit, index) {
 
 function onStepEnter({ element }) {
   const { datetime } = d3.select(element).datum();
-  commitProgress = timeScale(datetime);
-  timeSlider.valueAsNumber = commitProgress;
   updateCommitCutoff(datetime);
 }
 

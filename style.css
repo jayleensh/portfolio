@@ -258,18 +258,17 @@ dl.info[hidden]:not(:hover, :focus-within) {
 
 #scatter-story {
   position: relative;
+}
 
-  .step {
-    min-height: 9rem;
-    padding: 1rem 0;
-    display: flex;
-    align-items: center;
-  }
+#scatter-story .step {
+  min-height: 0;
+  padding: 0.85rem 0;
+  margin: 0;
+}
 
-  .step p {
-    margin: 0;
-    line-height: 1.5;
-  }
+#scatter-story .step p {
+  margin: 0;
+  line-height: 1.5;
 }
 
 #scatter-plot {
@@ -394,4 +393,23 @@ circle.selected {
   fill: var(--color-accent);
   stroke: currentColor;
   stroke-width: 1.5px;
+}
+
+#files {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.5fr);
+  row-gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+#files > div {
+  padding: 0.2rem 0;
+}
+
+#files dd {
+  padding-top: 0.2rem;
+  gap: 0.15rem;
+}
+
+#files .loc {
+  flex: 0 0 0.4rem;
 }
