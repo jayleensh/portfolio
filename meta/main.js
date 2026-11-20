@@ -276,6 +276,7 @@ function updateScatterPlot(visibleCommits) {
   brushed({ selection: d3.brushSelection(svg.node()) });
 }
 
+
 function updateFileDisplay(filteredCommits) {
   const lines = filteredCommits.flatMap((commit) => commit.lines);
   const files = d3
@@ -283,7 +284,15 @@ function updateFileDisplay(filteredCommits) {
     .map(([name, lines]) => ({ name, lines }))
     .sort((a, b) => b.lines.length - a.lines.length);
 
-  const rows = d3.select('#files')
+  const container = d3.select('#files');
+
+  const oldPositions = new Map();
+
+  container.selectAll(':scope > div').each(function (d) {
+    oldPositions.set(d.name, this.getBoundingClientRect().top);
+  });
+
+  const rows = container
     .selectAll(':scope > div')
     .data(files, (file) => file.name)
     .join((enter) => enter.append('div').call((row) => {
@@ -293,7 +302,10 @@ function updateFileDisplay(filteredCommits) {
       row.append('dd');
     }));
 
+  rows.order();
+
   rows.select('dt > code').text((file) => file.name);
+
   rows.select('dt > small').text((file) => {
     const count = file.lines.length;
     return `${count} ${count === 1 ? 'line' : 'lines'}`;
@@ -306,7 +318,26 @@ function updateFileDisplay(filteredCommits) {
     .attr('class', 'loc')
     .style('--color', (line) => colors(line.type))
     .attr('aria-hidden', 'true');
+
+  rows.each(function (d) {
+    const oldTop = oldPositions.get(d.name);
+    if (oldTop === undefined) return;
+
+    const newTop = this.getBoundingClientRect().top;
+    const distance = oldTop - newTop;
+
+    if (Math.abs(distance) < 1) return;
+
+    d3.select(this)
+      .interrupt()
+      .style('transform', `translateY(${distance}px)`)
+      .transition()
+      .duration(600)
+      .ease(d3.easeCubicOut)
+      .style('transform', 'translateY(0px)');
+  });
 }
+
 
 
 let data = await loadData();
