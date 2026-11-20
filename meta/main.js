@@ -276,8 +276,10 @@ function updateScatterPlot(visibleCommits) {
 
 function updateFileDisplay(filteredCommits) {
   const lines = filteredCommits.flatMap((commit) => commit.lines);
-  const files = d3.groups(lines, (line) => line.file)
-    .map(([name, lines]) => ({ name, lines }));
+  const files = d3
+    .groups(lines, (line) => line.file)
+    .map(([name, lines]) => ({ name, lines }))
+    .sort((a, b) => b.lines.length - a.lines.length);
 
   const rows = d3.select('#files')
     .selectAll(':scope > div')
@@ -300,10 +302,13 @@ function updateFileDisplay(filteredCommits) {
     .data((file) => file.lines)
     .join('div')
     .attr('class', 'loc')
+    .style('--color', (line) => colors(line.type))
     .attr('aria-hidden', 'true');
 }
 
 let data = await loadData();
+const colors = d3.scaleOrdinal(d3.schemeTableau10)
+  .domain(d3.sort(new Set(data.map((line) => line.type))));
 let commits = processCommits(data);
 let filteredCommits = commits;
 

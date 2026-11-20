@@ -277,7 +277,7 @@ dl.info[hidden]:not(:hover, :focus-within) {
   .loc {
     flex: 0 0 0.5em;
     aspect-ratio: 1;
-    background: steelblue;
+    background: var(--color);
     border-radius: 50%;
   }
 }
