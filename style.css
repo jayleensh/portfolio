@@ -492,3 +492,60 @@ circle.selected {
         min-height: 25vh;
     }
 }
+
+
+/* meta color palette */
+html {
+    --meta-css: #7299b8;
+    --meta-html: #d5a56d;
+    --meta-js: #b18eca;
+    --meta-svelte: #75afa5;
+}
+
+/* scatterplot circles */
+#chart circle {
+    fill: var(--color-accent);
+    transition: r 200ms, fill-opacity 200ms;
+}
+
+#chart circle:hover {
+    fill: var(--color-accent);
+    fill-opacity: 1;
+}
+
+/* selected commits */
+#chart circle.selected {
+    fill: var(--color-accent);
+    stroke: currentColor;
+    stroke-width: 1.5px;
+}
+
+/* scatterplot axes */
+#chart .tick line,
+#chart .domain {
+    stroke: currentColor;
+    stroke-opacity: 0.18;
+}
+
+#chart .tick text {
+    fill: currentColor;
+    opacity: 0.7;
+}
+
+/* file visualization dots */
+#files .loc {
+    background: var(--color);
+    opacity: 0.85;
+    transition: opacity 200ms, transform 200ms;
+}
+
+#files .loc:hover {
+    opacity: 1;
+    transform: scale(1.3);
+}
+
+/* active story steps */
+#scatter-story .step.is-active {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1rem;
+}

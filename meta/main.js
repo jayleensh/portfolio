@@ -260,7 +260,7 @@ function updateScatterPlot(visibleCommits) {
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', (d) => rScale(d.totalLines))
-    .attr('fill', 'steelblue')
+    .attr('fill', 'var(--color-accent)')
     .style('fill-opacity', 0.7)
     .on('mouseenter', (event, commit) => {
       d3.select(event.currentTarget).style('fill-opacity', 1);
@@ -311,8 +311,14 @@ function updateFileDisplay(filteredCommits) {
 
 let data = await loadData();
 
-const colors = d3.scaleOrdinal(d3.schemeTableau10)
-    .domain(d3.sort(new Set(data.map((line) => line.type))));
+const colors = d3.scaleOrdinal()
+    .domain(['CSS', 'HTML', 'JS', 'Svelte'])
+    .range([
+        '#7299b8',
+        '#d5a56d',
+        '#b18eca',
+        '#75afa5'
+    ]);
 
 let commits = processCommits(data);
 let filteredCommits = commits;
@@ -368,6 +374,12 @@ steps.each(function (commit, index) {
 
 function onStepEnter({ element }) {
     const commit = d3.select(element).datum();
+
+    d3.selectAll('#scatter-story .step')
+        .classed('is-active', false);
+
+    d3.select(element)
+        .classed('is-active', true);
 
     updateCommitCutoff(commit.datetime);
 }
