@@ -415,7 +415,7 @@ if (commits.length) {
     .setup({
       container: '#scrolly-1',
       step: '#scrolly-1 .step',
-      offset: 0.45,
+      offset: 0.25,
     })
     .onStepEnter(onStepEnter);
 }
