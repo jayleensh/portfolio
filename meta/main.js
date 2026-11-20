@@ -309,87 +309,84 @@ function updateFileDisplay(filteredCommits) {
 }
 
 
+
 let data = await loadData();
-
-const colors = d3.scaleOrdinal()
-    .domain(['CSS', 'HTML', 'JS', 'Svelte'])
-    .range([
-        '#7299b8',
-        '#d5a56d',
-        '#b18eca',
-        '#75afa5'
-    ]);
-
+const colors = d3.scaleOrdinal(d3.schemeTableau10)
+  .domain(d3.sort(new Set(data.map((line) => line.type))));
 let commits = processCommits(data);
 let filteredCommits = commits;
 
-function updateCommitCutoff(datetime) {
-    filteredCommits = commits.filter((d) => d.datetime <= datetime);
+let commitProgress = 100;
+const timeScale = d3
+  .scaleTime()
+  .domain(d3.extent(commits, (d) => d.datetime))
+  .range([0, 100]);
+let commitMaxTime;
 
-    updateScatterPlot(filteredCommits);
-    updateFileDisplay(filteredCommits);
+const timeSlider = document.getElementById('commit-progress');
+const commitTime = document.getElementById('commit-time');
+
+function onTimeSliderChange() {
+  commitProgress = timeSlider.valueAsNumber;
+  updateCommitCutoff(timeScale.invert(commitProgress));
+}
+
+function updateCommitCutoff(datetime) {
+  commitMaxTime = datetime;
+  if (Number.isNaN(commitMaxTime.getTime())) return;
+
+  commitTime.dateTime = commitMaxTime.toISOString();
+  commitTime.textContent = commitMaxTime.toLocaleString(undefined, {
+    dateStyle: 'long',
+    timeStyle: 'short',
+  });
+  filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
+  updateScatterPlot(filteredCommits);
+  updateFileDisplay(filteredCommits);
 }
 
 renderCommitInfo(data, commits);
 renderScatterPlot();
-updateScatterPlot(commits);
-updateFileDisplay(commits);
+timeSlider.addEventListener('input', onTimeSliderChange);
+onTimeSliderChange();
 
 const steps = d3.select('#scatter-story')
-    .selectAll('.step')
-    .data(commits, (commit) => commit.id)
-    .join('div')
-    .attr('class', 'step');
+  .selectAll('.step')
+  .data(commits, (commit) => commit.id)
+  .join('div')
+  .attr('class', 'step');
 
 steps.each(function (commit, index) {
-    const date = commit.datetime.toLocaleString('en', {
-        dateStyle: 'long',
-        timeStyle: 'short',
-    });
+  const date = commit.datetime.toLocaleString('en', {
+    dateStyle: 'full',
+    timeStyle: 'short',
+  });
+  const fileCount = new Set(commit.lines.map((line) => line.file)).size;
+  const paragraph = d3.select(this).append('p');
 
-    const fileCount = new Set(
-        commit.lines.map((line) => line.file)
-    ).size;
-
-    const paragraph = d3.select(this).append('p');
-
-    paragraph.append('time')
-        .attr('datetime', commit.datetime.toISOString())
-        .text(date);
-
-    paragraph.append('span')
-        .text(index === 0 ? ' · First commit ' : ' · Commit ');
-
-    paragraph.append('a')
-        .attr('href', commit.url)
-        .attr('target', '_blank')
-        .attr('rel', 'noopener noreferrer')
-        .text(commit.id.slice(0, 7));
-
-    paragraph.append('span')
-        .text(
-            ` edited ${commit.totalLines} lines across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}.`
-        );
+  paragraph.append('time')
+    .attr('datetime', commit.datetime.toISOString())
+    .text(date);
+  paragraph.append('span').text(index === 0 ? ' · First commit ' : ' · Commit ');
+  paragraph.append('a')
+    .attr('href', commit.url)
+    .attr('target', '_blank')
+    .attr('rel', 'noopener')
+    .text(commit.id.slice(0, 7));
+  paragraph.append('span').text(
+    ` covers ${commit.totalLines} ${commit.totalLines === 1 ? 'line' : 'lines'} across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}.`,
+  );
 });
 
 function onStepEnter({ element }) {
-    const commit = d3.select(element).datum();
-
-    d3.selectAll('#scatter-story .step')
-        .classed('is-active', false);
-
-    d3.select(element)
-        .classed('is-active', true);
-
-    updateCommitCutoff(commit.datetime);
+  const { datetime } = d3.select(element).datum();
+  commitProgress = timeScale(datetime);
+  timeSlider.valueAsNumber = commitProgress;
+  updateCommitCutoff(datetime);
 }
 
 if (commits.length) {
-    scrollama()
-        .setup({
-            container: '#scrolly-1',
-            step: '#scrolly-1 .step',
-            offset: 0.45,
-        })
-        .onStepEnter(onStepEnter);
+  scrollama()
+    .setup({ container: '#scrolly-1', step: '#scrolly-1 .step' })
+    .onStepEnter(onStepEnter);
 }

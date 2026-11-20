@@ -11,7 +11,7 @@ img {
 }
 
 html {
-    color-scheme: light dark;
+  color-scheme: light dark;
   --color-accent: oklch(77.608% 0.12806 1.736);   /* warm soft pink */
   /*--color-accent: oklch(78% 25% 180);   /* seafoam green-blue */
   /*--color-accent: oklch(70% 30% 275);   /* periwinkle */
@@ -123,75 +123,74 @@ dl.stats {
 
 /* project year */
 .project-year {
-    color: gray;
-    font-style: italic;
-    margin-top: 1em;
+  color: gray;
+  font-style: italic;
+  margin-top: 1em;
 }
 
 /* projects pie plot */
 #projects-pie-plot {
-    max-width: 20em;
-    margin-block: 2em;
-    overflow: visible;
-        &:has(path:hover) {
-        path:not(:hover) {
-            opacity: 0.5;
-        }
-    }
+  max-width: 20em;
+  margin-block: 2em;
+  overflow: visible;
 
-    path {
-        transition: 300ms;
-        cursor: pointer;
+  &:has(path:hover) {
+    path:not(:hover) {
+      opacity: 0.5;
     }
+  }
+
+  path {
+    transition: 300ms;
+    cursor: pointer;
+  }
 }
 
-
 .selected {
-    --color: var(--color-accent) !important;
+  --color: var(--color-accent) !important;
 }
 
 path.selected {
-    fill: var(--color-accent) !important;
+  fill: var(--color-accent) !important;
 }
-
 
 /* projects pie plot legend */
 .legend {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
-    gap: 1em;
-    border: 1px solid gray;
-    padding: 1em;
-    margin-block: 2em;
-    flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  gap: 1em;
+  border: 1px solid gray;
+  padding: 1em;
+  margin-block: 2em;
+  flex: 1;
 }
 
 .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
 }
 
 .swatch {
-    display: inline-block;
-    width: 1em;
-    aspect-ratio: 1 / 1;
-    background-color: var(--color);
-    border-radius: 3px;
+  display: inline-block;
+  width: 1em;
+  aspect-ratio: 1 / 1;
+  background-color: var(--color);
+  border-radius: 3px;
 }
 
 .container {
-    display: flex;
-    align-items: center;
-    gap: 2em;
+  display: flex;
+  align-items: center;
+  gap: 2em;
 }
 
 .searchBar {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.5em;
-    margin-bottom: 1.5em;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5em;
+  margin-bottom: 1.5em;
 }
 
 /* scatterplot gridlines */
@@ -357,195 +356,4 @@ circle:hover {
 
 circle.selected {
   fill: #ff6b6b;
-}
-
-
-
-/* meta page layout */
-#scrolly-1 {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    gap: 3rem;
-    align-items: start;
-    margin-top: 2rem;
-}
-
-#story-content {
-    min-width: 0;
-}
-
-#story-content h3,
-#scatter-plot h3 {
-    font-size: 1.1rem;
-    margin: 0 0 1.5rem;
-}
-
-/* commit descriptions */
-#scatter-story {
-    margin-top: 1rem;
-}
-
-#scatter-story .step {
-    display: block;
-    min-height: 27vh;
-    padding: 1.5rem 0;
-    box-sizing: border-box;
-    line-height: 1.6;
-}
-
-#scatter-story .step p {
-    margin: 0;
-    max-width: 42rem;
-}
-
-#scatter-story .step a {
-    font-weight: 500;
-}
-
-/* sticky scatterplot */
-#scatter-plot {
-    position: sticky;
-    top: 2rem;
-    align-self: start;
-    min-height: 0;
-    padding: 1rem;
-    border-radius: 8px;
-    background: canvas;
-}
-
-#chart {
-    width: 100%;
-    min-width: 0;
-}
-
-#chart svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-}
-
-#selection-count {
-    font-size: 0.9rem;
-    margin-top: 1rem;
-}
-
-/* file visualization */
-#files {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    gap: 0.8rem 1rem;
-    margin: 0 0 3rem;
-}
-
-#files > div {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: subgrid;
-    align-items: start;
-    padding: 0.5rem 0;
-}
-
-#files dt {
-    font-size: 0.85rem;
-    overflow-wrap: anywhere;
-}
-
-#files dd {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.2rem;
-    padding-top: 0.3rem;
-    margin: 0;
-}
-
-#files .loc {
-    flex: 0 0 0.45rem;
-    width: 0.45rem;
-    height: 0.45rem;
-    border-radius: 50%;
-}
-
-/* smaller screens */
-@media (max-width: 55rem) {
-    #scrolly-1 {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-    }
-
-    #story-content,
-    #scatter-plot {
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    #scatter-plot {
-        order: -1;
-        position: relative;
-        top: auto;
-        max-height: none;
-        overflow: visible;
-    }
-
-    #scatter-story .step {
-        min-height: 25vh;
-    }
-}
-
-
-/* meta color palette */
-html {
-    --meta-css: #7299b8;
-    --meta-html: #d5a56d;
-    --meta-js: #b18eca;
-    --meta-svelte: #75afa5;
-}
-
-/* scatterplot circles */
-#chart circle {
-    fill: var(--color-accent);
-    transition: r 200ms, fill-opacity 200ms;
-}
-
-#chart circle:hover {
-    fill: var(--color-accent);
-    fill-opacity: 1;
-}
-
-/* selected commits */
-#chart circle.selected {
-    fill: var(--color-accent);
-    stroke: currentColor;
-    stroke-width: 1.5px;
-}
-
-/* scatterplot axes */
-#chart .tick line,
-#chart .domain {
-    stroke: currentColor;
-    stroke-opacity: 0.18;
-}
-
-#chart .tick text {
-    fill: currentColor;
-    opacity: 0.7;
-}
-
-/* file visualization dots */
-#files .loc {
-    background: var(--color);
-    opacity: 0.85;
-    transition: opacity 200ms, transform 200ms;
-}
-
-#files .loc:hover {
-    opacity: 1;
-    transform: scale(1.3);
-}
-
-/* active story steps */
-#scatter-story .step.is-active {
-    border-left: 3px solid var(--color-accent);
-    padding-left: 1rem;
 }
