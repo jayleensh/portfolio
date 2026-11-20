@@ -280,18 +280,27 @@ function updateFileDisplay(filteredCommits) {
     .map(([name, lines]) => ({ name, lines }));
 
   const rows = d3.select('#files')
-    .selectAll('div')
+    .selectAll(':scope > div')
     .data(files, (file) => file.name)
     .join((enter) => enter.append('div').call((row) => {
-      row.append('dt').append('code');
+      const label = row.append('dt');
+      label.append('code');
+      label.append('small');
       row.append('dd');
     }));
 
   rows.select('dt > code').text((file) => file.name);
-  rows.select('dd').text((file) => {
+  rows.select('dt > small').text((file) => {
     const count = file.lines.length;
     return `${count} ${count === 1 ? 'line' : 'lines'}`;
   });
+
+  rows.select('dd')
+    .selectAll('.loc')
+    .data((file) => file.lines)
+    .join('div')
+    .attr('class', 'loc')
+    .attr('aria-hidden', 'true');
 }
 
 let data = await loadData();
