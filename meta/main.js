@@ -397,11 +397,11 @@ steps.each(function (commit, index) {
     .attr('href', commit.url)
     .attr('target', '_blank')
     .attr('rel', 'noopener noreferrer')
-    .text(index === 0 ? 'my very first commit' : 'another lovely commit');
+    .text(index === 0 ? 'my very first commit' : 'another commit');
 
   paragraph.append('span')
     .text(
-      `! I edited ${commit.totalLines} ${commit.totalLines === 1 ? 'line' : 'lines'} across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}. Then I admired my work and called it a day.`
+      `! I edited ${commit.totalLines} ${commit.totalLines === 1 ? 'line' : 'lines'} across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}.`
     );
 });
 

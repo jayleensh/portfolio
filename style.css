@@ -319,6 +319,7 @@ dl.info[hidden] {
   grid-template-columns: subgrid;
   align-items: start;
   padding: 0.25rem 0;
+  will-change: transform;
 }
 
 #files dt {
