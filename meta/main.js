@@ -274,6 +274,26 @@ function updateScatterPlot(visibleCommits) {
   brushed({ selection: d3.brushSelection(svg.node()) });
 }
 
+function updateFileDisplay(filteredCommits) {
+  const lines = filteredCommits.flatMap((commit) => commit.lines);
+  const files = d3.groups(lines, (line) => line.file)
+    .map(([name, lines]) => ({ name, lines }));
+
+  const rows = d3.select('#files')
+    .selectAll('div')
+    .data(files, (file) => file.name)
+    .join((enter) => enter.append('div').call((row) => {
+      row.append('dt').append('code');
+      row.append('dd');
+    }));
+
+  rows.select('dt > code').text((file) => file.name);
+  rows.select('dd').text((file) => {
+    const count = file.lines.length;
+    return `${count} ${count === 1 ? 'line' : 'lines'}`;
+  });
+}
+
 let data = await loadData();
 let commits = processCommits(data);
 let filteredCommits = commits;
@@ -300,6 +320,7 @@ function onTimeSliderChange() {
   });
   filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
   updateScatterPlot(filteredCommits);
+  updateFileDisplay(filteredCommits);
 }
 
 renderCommitInfo(data, commits);

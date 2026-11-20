@@ -242,6 +242,28 @@ dl.info[hidden]:not(:hover, :focus-within) {
   margin-inline: 0;
 }
 
+#files {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  column-gap: 1em;
+
+  > div {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  dt {
+    grid-column: 1;
+    overflow-wrap: anywhere;
+  }
+
+  dd {
+    grid-column: 2;
+    margin-inline-start: 0;
+  }
+}
+
 /* dot hover effect */
 circle {
   transition: 200ms;
