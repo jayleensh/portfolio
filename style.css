@@ -236,6 +236,12 @@ dl.info[hidden]:not(:hover, :focus-within) {
   backdrop-filter: blur(6px);
 }
 
+#commit-progress {
+  display: block;
+  width: 100%;
+  margin-inline: 0;
+}
+
 /* dot hover effect */
 circle {
   transition: 200ms;
