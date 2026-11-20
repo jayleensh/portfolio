@@ -311,32 +311,38 @@ function updateFileDisplay(filteredCommits) {
 
 let data = await loadData();
 
+const palette = {
+  css: '#7299b8',
+  html: '#d5a56d',
+  js: '#b18eca',
+  javascript: '#b18eca',
+  svelte: '#75afa5',
+};
+
+const types = d3.sort(new Set(data.map((line) => line.type)));
+
 const colors = d3.scaleOrdinal()
-  .domain(['CSS', 'HTML', 'JS', 'Svelte'])
-  .range([
-    'var(--meta-css)',
-    'var(--meta-html)',
-    'var(--meta-js)',
-    'var(--meta-svelte)'
-  ])
-  .unknown('var(--color-accent)');
+  .domain(types)
+  .range(types.map((type) =>
+    palette[String(type).toLowerCase()] ?? '#dca0bc'
+  ));
+
 let commits = processCommits(data);
 let filteredCommits = commits;
 
-let commitMaxTime;
-
 function updateCommitCutoff(datetime) {
-  commitMaxTime = datetime;
-  if (Number.isNaN(commitMaxTime.getTime())) return;
+  filteredCommits = commits.filter((d) => d.datetime <= datetime);
 
-  filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
   updateScatterPlot(filteredCommits);
   updateFileDisplay(filteredCommits);
 }
 
 renderCommitInfo(data, commits);
 renderScatterPlot();
-updateCommitCutoff(commits[0].datetime);
+
+if (commits.length > 0) {
+  updateCommitCutoff(commits[0].datetime);
+}
 
 const steps = d3.select('#scatter-story')
   .selectAll('.step')
@@ -349,21 +355,23 @@ steps.each(function (commit, index) {
     dateStyle: 'full',
     timeStyle: 'short',
   });
+
   const fileCount = new Set(commit.lines.map((line) => line.file)).size;
   const paragraph = d3.select(this).append('p');
 
-  paragraph.append('time')
-    .attr('datetime', commit.datetime.toISOString())
-    .text(date);
-  paragraph.append('span').text(index === 0 ? ' · First commit ' : ' · Commit ');
+  paragraph.append('span')
+    .text(`On ${date}, I made `);
+
   paragraph.append('a')
     .attr('href', commit.url)
     .attr('target', '_blank')
-    .attr('rel', 'noopener')
-    .text(commit.id.slice(0, 7));
-  paragraph.append('span').text(
-    ` covers ${commit.totalLines} ${commit.totalLines === 1 ? 'line' : 'lines'} across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}.`,
-  );
+    .attr('rel', 'noopener noreferrer')
+    .text(index === 0 ? 'my very first commit' : 'another lovely commit');
+
+  paragraph.append('span')
+    .text(
+      `! I edited ${commit.totalLines} ${commit.totalLines === 1 ? 'line' : 'lines'} across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}. Then I admired my work and called it a day.`
+    );
 });
 
 function onStepEnter({ element }) {
@@ -373,6 +381,10 @@ function onStepEnter({ element }) {
 
 if (commits.length) {
   scrollama()
-    .setup({ container: '#scrolly-1', step: '#scrolly-1 .step' })
+    .setup({
+      container: '#scrolly-1',
+      step: '#scrolly-1 .step',
+      offset: 0.45,
+    })
     .onStepEnter(onStepEnter);
 }
